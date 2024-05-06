@@ -12,7 +12,6 @@ const console = require('console').console;
 
 chai.use(chaiHttp);
 
-
 describe('Testing app controller', () => {
     let controller: RunController;
 
