@@ -29,7 +29,7 @@ export default class apiController {
         return res.status(400).json({ error: 'Bad request' });
       }
 
-      const providerNames: string[] = providerService.getAppointments(specialty, date, minScore);
+      const providerNames: string[] = providerService.getAppointments(specialty.toString(), parseInt(date.toString()), minScore.toString());
       res.status(200).json(providerNames);
     } catch (error) {
       console.error('Error:', error);
