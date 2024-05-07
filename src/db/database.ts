@@ -2,16 +2,18 @@ import Doctor from "../interfaces/doctor.model";
 import fs from 'fs';
 
 // Mock data (replace with your actual data source)
-const providers:Doctor[] = JSON.parse(fs.readFileSync('providers.json', 'utf-8'));
+
+const data = fs.readFileSync('providers.json', 'utf-8');
+const providers:Doctor[] = JSON.parse(data);
 
 // Create cache of providers by name
-const providersByName = providers.reduce((acc: any, provider: Doctor) => {
+const providersByNameCache: { [key: string]: Doctor[] } = providers.reduce((acc: any, provider: Doctor) => {
     acc[provider.name] = provider;
     return acc;
 }, {});
 
 // Create cache of providers by specialty
-/*const providersBySpecialty = providers.reduce((acc:any, provider: Doctor) => {
+/*const providersBySpecialtyCache = providers.reduce((acc:any, provider: Doctor) => {
     //const specialtyKey = provider.specialties.toLowerCase();
     if (!acc[specialtyKey]) {
         acc[specialtyKey] = [];
@@ -38,7 +40,5 @@ const readProvidersData = (filePath: string): Promise<any[]> => {
     });
 };
 */
-
-const cache: { [key: string]: string[] } = {};
 
 export default providers;
