@@ -26,7 +26,7 @@ export default class apiController {
       //const runner = await RunController.fetchValidatedRunner(runStat.name, data, signature);
       res.status(200).send({ranking: -1});
       res.status(404).send({
-        message: `Cannot find validated runner with name=${xxx}.`,
+        message: `Cannot find validated runner with name=.`, // ${xxx}
       });
     } catch (err) {
       res.status(500).send({
