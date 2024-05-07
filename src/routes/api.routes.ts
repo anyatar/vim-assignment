@@ -7,8 +7,7 @@ const controller = new apiController();
 
 router.get("/", welcome);
 
-//router.post("/signup", controller.create);
-router.put("/update", controller.update);
-router.get("/users", controller.getUsers);
+router.post("/appointments ", controller.setup);
+router.get("/appointments", controller.getAppointments);
 
 export default router;

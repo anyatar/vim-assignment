@@ -3,13 +3,12 @@ The ``` Vim task ``` is a API Server!
 
 The application is built according to compliance with the [system requirements]().
 
-# Rest API with MySQL 
+# Rest API 
 
 | Methods	| Urls	          | Actions
 | --------- | ----------------| ----------------------------------------- |
-| POST      | /signup         | Signs the user up to the application
-| PUT       | /update         | Updates the users total running distance
-| GET       | /mystats        | Returns the users' ranking
+| POST      | /setup         | xxx
+| GET       | /getAppointments        | yyy
 
 
 ## Project Structure
@@ -35,14 +34,6 @@ $ npm run start
 - Using docker from the application folder, run ```docker-compose build``` and ```docker-compose up```
 
 ![Docker snapshot](image.png)
-
-
-## Testing application 
-
-Please use attached [Postman](https://www.getpostman.com/) JSON [collection](./test/xxx.postman_collection.json) in order to test API requests
-You can import this collaction with prepared requests for tests
-
-![Postman tests](postman.png)
 
 ## Useful docs
 

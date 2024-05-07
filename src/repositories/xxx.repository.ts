@@ -1,9 +1,9 @@
 import { OkPacket } from "mysql2";
 import connection from "../db/index-mysql";
 
-import Person from "../interfaces/person.model";
-import Runner from "../interfaces/person.model";
-import {RunStatType} from "../interfaces/person.model";
+import Person from "../interfaces/doctor.model";
+import Runner from "../interfaces/doctor.model";
+import {RunStatType} from "../interfaces/doctor.model";
 
 const USERS_TABLE = 'users';
 
