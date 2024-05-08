@@ -13,11 +13,11 @@ export default class apiController {
       }
   
       providerService.setup(name, +date);
-      return res.status(200);
+      return res.status(200).json();
 
     } catch (error) {
       console.error('Error:', error);
-      res.status(400);
+      res.status(400).json({ error: 'Bad request' });
     }
   }
 
@@ -25,7 +25,7 @@ export default class apiController {
     try {
       const { specialty, date, minScore } = req.query;
 
-      if (!specialty || !date || !minScore) {
+      if (!specialty || !date || !minScore || isNaN(parseInt(date.toString()))) {
         return res.status(400).json({ error: 'Bad request' });
       }
 
@@ -33,7 +33,7 @@ export default class apiController {
       res.status(200).json(providerNames);
     } catch (error) {
       console.error('Error:', error);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(400).json({ error: 'Internal server error' });
     }
   }
 }

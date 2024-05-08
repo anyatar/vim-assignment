@@ -7,20 +7,27 @@ const data = fs.readFileSync('providers.json', 'utf-8');
 const providers:Doctor[] = JSON.parse(data);
 
 // Create cache of providers by name
-const providersByNameCache: { [key: string]: Doctor[] } = providers.reduce((acc: any, provider: Doctor) => {
+export const providersByNameCache: { [key: string]: Doctor } = providers.reduce((acc: any, provider: Doctor) => {
     acc[provider.name] = provider;
     return acc;
 }, {});
 
 // Create cache of providers by specialty
-/*const providersBySpecialtyCache = providers.reduce((acc:any, provider: Doctor) => {
+export const providersBySpecialtyCache = providers.reduce((acc:any, provider: Doctor) => {
+    
     //const specialtyKey = provider.specialties.toLowerCase();
-    if (!acc[specialtyKey]) {
-        acc[specialtyKey] = [];
+    for (const specialtyKey of provider.specialties) {
+
+        const specialtyKeyLow = specialtyKey.toLowerCase();
+        if (!acc[specialtyKeyLow]) {
+            acc[specialtyKeyLow] = [];
+        }
+        acc[specialtyKeyLow].push(provider);
     }
-    acc[specialtyKey].push(provider);
+
     return acc;
-}, {});*/
+
+}, {});
 
 /*
 const readProvidersData = (filePath: string): Promise<any[]> => {
@@ -41,4 +48,3 @@ const readProvidersData = (filePath: string): Promise<any[]> => {
 };
 */
 
-export default providers;

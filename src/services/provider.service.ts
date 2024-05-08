@@ -1,12 +1,13 @@
 import Doctor from "../interfaces/doctor.model";
 import {AvailbilityDateItem} from "../interfaces/doctor.model";
-import providers from "../db/database";
+import {providersByNameCache, providersBySpecialtyCache} from "../db/database";
 
 class ProviderService {
 
   setup(name: string, appointmentDate: number) {
 
-    const provider = providers.find(provider => provider.name.toLowerCase() === name.toLowerCase());
+    //const provider = providers.find(provider => provider.name.toLowerCase() === name.toLowerCase());
+    const provider = providersByNameCache[name] ?? null;
     if (!provider) {
       throw Error(`Provider ${name} not found`);
     }
@@ -22,14 +23,17 @@ class ProviderService {
 
   getAppointments(specialty: string, date: number, minScore: string): string[] {
 
-    const filteredProviders: Doctor[] = providers.filter(provider =>
-      provider.specialties.map((spec) => spec.toLowerCase()).includes(specialty.toLowerCase()) &&
+    const providers = providersBySpecialtyCache[specialty.toLowerCase()] ?? null;
+    if (!providers) {
+      return [];
+    }
+    const filteredProviders: Doctor[] = providers.filter((provider: Doctor) =>
       provider.availableDates.some(avail => avail.from <= date && avail.to >= date) &&
       provider.score >= parseFloat(minScore)
     );
   
     if (filteredProviders.length === 0) {
-      throw Error('No providers found matching the criteria');
+      return [];
     }
   
     const sortedProviders: Doctor[] = filteredProviders.sort((a, b) => b.score - a.score);
